@@ -1,0 +1,7 @@
+{
+  "name": "The Innovation Engine",
+  "description": "Turn a messy real-world or planetary problem into a structured brief and concrete ways to get involved this week.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

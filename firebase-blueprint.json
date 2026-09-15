@@ -1,0 +1,61 @@
+{
+  "entities": {
+    "Brief": {
+      "title": "Brief",
+      "description": "A generated innovation brief with real-world pathways",
+      "type": "object",
+      "properties": {
+        "originalProblem": {
+          "type": "string",
+          "maxLength": 5000
+        },
+        "brief": {
+          "type": "object"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["originalProblem", "brief", "createdAt"]
+    },
+    "UserBrief": {
+      "title": "UserBrief",
+      "description": "Reference to a brief saved under a user account with pathway commitment statuses",
+      "type": "object",
+      "properties": {
+        "briefId": {
+          "type": "string"
+        },
+        "originalProblem": {
+          "type": "string",
+          "maxLength": 5000
+        },
+        "brief": {
+          "type": "object"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "pathwayStatuses": {
+          "type": "object"
+        }
+      },
+      "required": ["briefId", "originalProblem", "brief", "createdAt", "pathwayStatuses"]
+    }
+  },
+  "firestore": {
+    "/briefs/{briefId}": {
+      "schema": "Brief",
+      "description": "Public innovation briefs accessible by ID for sharing"
+    },
+    "/users/{userId}/userBriefs/{briefId}": {
+      "schema": "UserBrief",
+      "description": "User personal brief records and pathway progress"
+    }
+  }
+}

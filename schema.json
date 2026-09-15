@@ -1,0 +1,54 @@
+{
+  "type": "object",
+  "properties": {
+    "problem_reframed": {
+      "type": "object",
+      "properties": {
+        "summary": { "type": "string" },
+        "sub_problems": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "landscape": {
+      "type": "object",
+      "properties": {
+        "summary": { "type": "string" },
+        "key_players": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": { "name": {"type":"string"}, "what_they_do": {"type":"string"} }
+          }
+        }
+      }
+    },
+    "gaps": {
+      "type": "object",
+      "properties": {
+        "summary": { "type": "string" },
+        "openings": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "pathways": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "platform": { "type": "string" },
+          "category": { "type": "string" },
+          "why_fit": { "type": "string" },
+          "keywords": { "type": "string" },
+          "search_url": { "type": "string" },
+          "first_step": { "type": "string" }
+        }
+      }
+    },
+    "first_move": {
+      "type": "object",
+      "properties": {
+        "action": { "type": "string" },
+        "why": { "type": "string" },
+        "time_estimate": { "type": "string" }
+      }
+    }
+  }
+}

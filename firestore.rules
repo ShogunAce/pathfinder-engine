@@ -1,0 +1,64 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 1. Global default-deny safety net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+    function incoming() {
+      return request.resource.data;
+    }
+    function existing() {
+      return resource.data;
+    }
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // Connection test document
+    match /test/connection {
+      allow read: if true;
+    }
+
+    // Briefs collection - public lookup by ID
+    match /briefs/{briefId} {
+      allow get: if isValidId(briefId);
+      allow list: if false;
+
+      allow create: if isValidId(briefId)
+        && incoming().originalProblem is string
+        && incoming().originalProblem.size() > 0
+        && incoming().originalProblem.size() <= 5000
+        && incoming().brief is map
+        && incoming().createdAt is timestamp;
+
+      allow update, delete: if false;
+    }
+
+    // User's personal saved briefs and pathway statuses
+    match /users/{userId}/userBriefs/{briefId} {
+      allow get, list: if isSignedIn() && request.auth.uid == userId;
+
+      allow create: if isSignedIn()
+        && request.auth.uid == userId
+        && isValidId(briefId)
+        && incoming().briefId is string
+        && incoming().originalProblem is string
+        && incoming().originalProblem.size() <= 5000
+        && incoming().brief is map
+        && incoming().pathwayStatuses is map
+        && incoming().createdAt is timestamp;
+
+      allow update: if isSignedIn()
+        && request.auth.uid == userId
+        && incoming().diff(existing()).affectedKeys().hasOnly(['pathwayStatuses'])
+        && incoming().pathwayStatuses is map;
+
+      allow delete: if isSignedIn() && request.auth.uid == userId;
+    }
+  }
+}
