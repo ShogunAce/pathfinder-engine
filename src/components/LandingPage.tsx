@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { motion } from "motion/react";
 import type { User } from "firebase/auth";
 import { EarthGlobe } from "./EarthGlobe.tsx";
+import changemakerImg from "../assets/images/changemaker_portrait_1789523755481.jpg";
+import citizenScienceImg from "../assets/images/citizen_science_team_1789523766114.jpg";
 import {
   Sparkles,
   MapPin,
@@ -437,19 +439,26 @@ export const LandingPage: React.FC<LandingPageProps> = ({
         {/* WHO IT IS FOR */}
         <section id="who" className="py-24 wrap border-t border-[var(--hair)]">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Changemaker image placeholder */}
+            {/* Changemaker image */}
             <div className="lg:col-span-5 order-2 lg:order-1">
               <div className="bezel">
-                <div className="core p-3">
-                  <div className="ph aspect-[1/1.16]">
-                    <span className="ph-corner tl" />
-                    <span className="ph-corner tr" />
-                    <span className="ph-corner bl" />
-                    <span className="ph-corner br" />
-                    <span className="ph-name">Changemaker Image</span>
-                    <span className="ph-dim">
-                      Portrait 1 : 1.16 &nbsp;/&nbsp; 1000 x 1160 px
-                    </span>
+                <div className="core p-2.5 sm:p-3 overflow-hidden rounded-[1.35rem]">
+                  <div className="relative aspect-[1/1.16] w-full rounded-xl overflow-hidden border border-white/10 group">
+                    <img
+                      src={changemakerImg}
+                      alt="Changemaker working on innovative technology"
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover object-center transform transition-transform duration-700 ease-out group-hover:scale-105"
+                    />
+                    {/* Subtle atmospheric vignette and brand accent overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--void)]/85 via-[var(--void)]/20 to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 ring-1 ring-inset ring-white/15 rounded-xl pointer-events-none" />
+                    <div className="absolute bottom-3.5 left-4 right-4 flex items-center justify-between pointer-events-none">
+                      <span className="font-mono text-[11px] tracking-widest text-[var(--foam)] uppercase drop-shadow-md">
+                        Innovators of Tomorrow
+                      </span>
+                      <span className="w-2 h-2 rounded-full bg-[var(--foam)] shadow-[0_0_8px_var(--foam)]" />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -610,13 +619,21 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                     watching.
                   </p>
                 </div>
-                <div className="ph aspect-[16/10] mt-4">
-                  <span className="ph-corner tl" />
-                  <span className="ph-corner tr" />
-                  <span className="ph-corner bl" />
-                  <span className="ph-corner br" />
-                  <span className="ph-name">Field Science Image</span>
-                  <span className="ph-dim">Landscape 16 : 10 &nbsp;/&nbsp; 1280 x 800 px</span>
+                <div className="relative aspect-[16/10] w-full mt-4 rounded-xl overflow-hidden border border-white/10 group">
+                  <img
+                    src={citizenScienceImg}
+                    alt="Citizen science community collaborating together"
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover object-center transform transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--void)]/80 via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 ring-1 ring-inset ring-white/15 rounded-xl pointer-events-none" />
+                  <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between pointer-events-none">
+                    <span className="font-mono text-[11px] tracking-widest text-[var(--sky)] uppercase drop-shadow-md">
+                      Community Fieldwork &bull; Live Observations
+                    </span>
+                    <span className="w-2 h-2 rounded-full bg-[var(--sky)] shadow-[0_0_8px_var(--sky)]" />
+                  </div>
                 </div>
               </div>
             </motion.article>
