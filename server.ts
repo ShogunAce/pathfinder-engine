@@ -152,13 +152,16 @@ CRITICAL RULES:
 4. List the discovered organizations, real specific projects, and their exact direct URLs.`;
 
   const groundingModels = [
-    "gemini-3.8-flash",
-    "gemini-3.6-flash",
+    "gemini-2.5-flash",
+    "gemini-3.7-flash",
+    "gemini-2.5-flash-lite",
     "gemini-3.1-flash-lite",
+    "gemini-3.8-flash",
     "gemini-flash-latest",
   ];
 
-  for (const modelName of groundingModels) {
+  for (let i = 0; i < groundingModels.length; i++) {
+    const modelName = groundingModels[i];
     try {
       console.log(`[Google Search Grounding] Running live search with ${modelName}...`);
       const response = await ai.models.generateContent({
@@ -193,6 +196,9 @@ CRITICAL RULES:
       }
     } catch (err: unknown) {
       console.warn(`[Google Search Grounding] ${modelName} search attempt:`, err instanceof Error ? err.message : err);
+      if (isTransientError(err) && i < groundingModels.length - 1) {
+        await sleep(500 * (i + 1));
+      }
     }
   }
 
@@ -272,9 +278,11 @@ CRITICAL PATHWAY INSTRUCTIONS:
 
       // Priority list for structured synthesis
       const modelsToTry = [
-        "gemini-3.8-flash",
-        "gemini-3.6-flash",
+        "gemini-2.5-flash",
+        "gemini-3.7-flash",
+        "gemini-2.5-flash-lite",
         "gemini-3.1-flash-lite",
+        "gemini-3.8-flash",
         "gemini-flash-latest",
       ];
 

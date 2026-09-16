@@ -9,11 +9,11 @@ interface LandingHeroProps {
 }
 
 const EXAMPLE_PROBLEMS = [
-  "Microplastics are showing up in our local water supply but there's no cheap way for regular people to test for them.",
-  "Open-source investigators keep re-finding the same geolocation tools from scratch because there's no maintained, verified list.",
-  "Small clinics in underserved areas can't predict patient demand, so they're always over- or under-staffed.",
-  "A tiny nonprofit I know has years of donor data but no one who can turn it into a fundraising strategy.",
-  "I care about my community and want to help, but I honestly don't know where to start.",
+  "I love dolphins and want to help scientists identify and track them from photos, but I don't have any research background.",
+  "I want to help monitor the health and water quality of the lakes and coast near me using just my phone.",
+  "I want to use online research skills to help find missing people, but I don't know where volunteers actually do that.",
+  "Disaster responders can't reach vulnerable communities because huge areas simply aren't on any map yet.",
+  "I'm a developer who wants to join a real team using AI to solve a humanitarian or environmental problem, not just build demos.",
 ];
 
 export const LandingHero: React.FC<LandingHeroProps> = ({
