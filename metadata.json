@@ -1,6 +1,6 @@
 {
-  "name": "The Innovation Engine",
-  "description": "Turn a messy real-world or planetary problem into a structured brief and concrete ways to get involved this week.",
+  "name": "Pathfinder Engine",
+  "description": "Turn a problem you care about into your first real move. Name any real world or planetary problem and get a clear brief with matched ways to get involved this week.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

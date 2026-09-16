@@ -30,58 +30,62 @@ export const LoadingState: React.FC<LoadingStateProps> = ({ problemPrompt }) => 
       className="w-full max-w-xl mx-auto px-4 py-16 sm:py-24 text-center space-y-8"
     >
       <div className="relative inline-flex items-center justify-center">
-        <div className="w-16 h-16 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-200/80 animate-pulse">
-          <Loader2 className="w-8 h-8 animate-spin text-emerald-600" />
+        <div className="w-16 h-16 rounded-2xl bg-[var(--hair)] border border-[var(--hair-strong)] flex items-center justify-center shadow-lg">
+          <Loader2 className="w-8 h-8 animate-spin text-[var(--foam)]" />
         </div>
       </div>
 
       <div className="space-y-3">
-        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 font-display">
-          Building your Innovation Brief
+        <h2 className="text-2xl sm:text-3xl font-display font-light tracking-tight text-[var(--ink)]">
+          Synthesizing your <span className="serif grad">Pathfinder Brief</span>
         </h2>
-        <p className="text-sm text-zinc-500 italic max-w-md mx-auto line-clamp-2">
+        <p className="text-sm text-[var(--mute)] italic max-w-md mx-auto line-clamp-2">
           &ldquo;{problemPrompt}&rdquo;
         </p>
       </div>
 
-      {/* Step progression */}
-      <div className="bg-white rounded-2xl border border-zinc-200/80 p-5 shadow-xs max-w-md mx-auto text-left space-y-3">
-        {STEPS.map((step, idx) => {
-          const isDone = idx < currentStepIndex;
-          const isCurrent = idx === currentStepIndex;
-          const StepIcon = step.icon;
+      {/* Step progression in double bezel */}
+      <div className="bezel max-w-md mx-auto text-left">
+        <div className="core p-5 space-y-3.5">
+          {STEPS.map((step, idx) => {
+            const isDone = idx < currentStepIndex;
+            const isCurrent = idx === currentStepIndex;
+            const StepIcon = step.icon;
 
-          return (
-            <div
-              key={idx}
-              className={`flex items-center gap-3 text-xs sm:text-sm transition-all ${
-                isCurrent
-                  ? "text-emerald-700 font-semibold"
-                  : isDone
-                  ? "text-zinc-500"
-                  : "text-zinc-300"
-              }`}
-            >
+            return (
               <div
-                className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-[10px] ${
-                  isDone
-                    ? "bg-emerald-100 text-emerald-700"
-                    : isCurrent
-                    ? "bg-emerald-600 text-white animate-pulse"
-                    : "bg-zinc-100 text-zinc-400"
+                key={idx}
+                className={`flex items-center gap-3 text-xs sm:text-sm transition-all ${
+                  isCurrent
+                    ? "text-[var(--foam)] font-medium"
+                    : isDone
+                    ? "text-[var(--mute)]"
+                    : "text-zinc-600"
                 }`}
               >
-                {isDone ? "✓" : idx + 1}
+                <div
+                  className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-[10px] ${
+                    isDone
+                      ? "bg-[var(--foam)]/20 text-[var(--foam)] border border-[var(--foam)]/40"
+                      : isCurrent
+                      ? "bg-[var(--foam)] text-zinc-950 font-bold animate-pulse"
+                      : "bg-white/5 text-zinc-600 border border-white/5"
+                  }`}
+                >
+                  {isDone ? "✓" : idx + 1}
+                </div>
+                <span className="flex-1">{step.label}</span>
+                {isCurrent && (
+                  <StepIcon className="w-3.5 h-3.5 animate-spin text-[var(--foam)] shrink-0" />
+                )}
               </div>
-              <span className="flex-1">{step.label}</span>
-              {isCurrent && <StepIcon className="w-3.5 h-3.5 animate-spin text-emerald-600 shrink-0" />}
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
 
-      <p className="text-xs text-zinc-400">
-        Aligning opportunities against Zooniverse, SciStarter, Omdena, GitHub, Devpost & more...
+      <p className="font-mono text-xs text-[var(--faint)]">
+        Cross-referencing Zooniverse, SciStarter, Omdena, GitHub & open public interest projects...
       </p>
     </div>
   );

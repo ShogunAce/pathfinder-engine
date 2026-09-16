@@ -41,6 +41,8 @@ export interface InnovationBrief {
   first_move: FirstMove;
 }
 
+export type BriefResponse = InnovationBrief;
+
 export interface GenerateBriefRequest {
   problem: string;
 }
@@ -65,4 +67,23 @@ export interface SavedBriefDoc {
   brief: InnovationBrief;
   userId?: string | null;
   createdAt: any;
+}
+
+export interface ChatMessage {
+  id: string;
+  role: "user" | "model";
+  content: string;
+  timestamp?: number;
+}
+
+export interface ChatRequest {
+  originalProblem?: string;
+  brief?: InnovationBrief | null;
+  history: Array<{ role: "user" | "model"; content: string }>;
+  message: string;
+}
+
+export interface ChatResponse {
+  reply?: string;
+  error?: string;
 }

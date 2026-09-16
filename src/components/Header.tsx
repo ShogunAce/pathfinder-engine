@@ -1,5 +1,5 @@
 import React from "react";
-import { Compass, RotateCcw, LogIn, LogOut, Map } from "lucide-react";
+import { RotateCcw, LogOut, MapPin, ArrowLeft } from "lucide-react";
 import type { User } from "firebase/auth";
 
 interface HeaderProps {
@@ -28,38 +28,48 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <header
       id="app-header"
-      className="w-full border-b border-zinc-200/80 bg-white/80 backdrop-blur-md sticky top-0 z-30 transition-all"
+      className="w-full border-b border-[var(--hair)] bg-[rgba(8,14,20,0.75)] backdrop-blur-xl sticky top-0 z-40 transition-all"
     >
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
-        {/* Brand logo */}
-        <button
-          id="btn-brand-home"
-          onClick={onNavigateHome}
-          className="flex items-center gap-2.5 text-left group focus:outline-none shrink-0"
-        >
-          <div className="w-9 h-9 rounded-xl bg-zinc-900 text-white flex items-center justify-center transition-transform group-hover:scale-105 shadow-sm">
-            <Compass className="w-5 h-5 text-emerald-400" />
-          </div>
-          <div>
-            <span className="font-display font-bold text-zinc-950 tracking-tight text-lg leading-tight block">
-              The Innovation Engine
-            </span>
-            <span className="text-[11px] text-zinc-500 font-medium tracking-wide uppercase block -mt-0.5">
-              Actionable Problem Intelligence
-            </span>
-          </div>
-        </button>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+        {/* Brand logo / home */}
+        <div className="flex items-center gap-3">
+          <button
+            id="btn-brand-home"
+            onClick={onNavigateHome}
+            className="flex items-center gap-2.5 text-left group focus:outline-none shrink-0"
+          >
+            <span className="mark-bead" />
+            <div>
+              <span className="font-mono text-xs sm:text-sm tracking-wider uppercase font-semibold text-zinc-100 block">
+                Pathfinder Engine
+              </span>
+              <span className="text-[10px] font-mono tracking-widest text-[var(--mute)] uppercase block -mt-0.5">
+                Problem Intelligence
+              </span>
+            </div>
+          </button>
+        </div>
 
         {/* Right side controls */}
-        <div className="flex items-center gap-2 sm:gap-3">
-          {/* New Problem Reset Button if applicable */}
+        <div className="flex items-center gap-2.5 sm:gap-3">
+          {/* Back to landing / overview */}
+          <button
+            id="btn-nav-overview"
+            onClick={onNavigateHome}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium text-[var(--mute)] hover:text-[var(--ink)] hover:bg-white/5 transition-colors border border-[var(--hair)]"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>Landing</span>
+          </button>
+
+          {/* New Problem Reset Button if on result view */}
           {showReset && (
             <button
               id="btn-new-brief-nav"
               onClick={onReset}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100 transition-colors border border-zinc-200"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium text-zinc-300 hover:text-white bg-white/5 hover:bg-white/10 transition-colors border border-[var(--hair)]"
             >
-              <RotateCcw className="w-3.5 h-3.5" />
+              <RotateCcw className="w-3.5 h-3.5 text-[var(--foam)]" />
               <span className="hidden sm:inline">New Problem</span>
             </button>
           )}
@@ -69,22 +79,22 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               id="btn-nav-my-journey"
               onClick={onNavigateDashboard}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all border ${
+              className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all border ${
                 currentRoute === "/dashboard"
-                  ? "bg-emerald-50 text-emerald-800 border-emerald-300 shadow-2xs"
-                  : "text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 border-zinc-200"
+                  ? "bg-[var(--hair-strong)] text-[var(--sky)] border-[var(--sky)] shadow-sm"
+                  : "text-zinc-300 hover:text-white bg-white/5 hover:bg-white/10 border-[var(--hair)]"
               }`}
             >
-              <Map className="w-3.5 h-3.5 text-emerald-600" />
+              <MapPin className="w-3.5 h-3.5 text-[var(--foam)]" />
               <span>My Journey</span>
             </button>
           )}
 
           {/* Auth State Control */}
           {authLoading ? (
-            <div className="w-24 h-8 bg-zinc-100 rounded-lg animate-pulse" />
+            <div className="w-20 h-7 bg-white/5 rounded-full animate-pulse" />
           ) : user ? (
-            <div className="flex items-center gap-2 pl-1 border-l border-zinc-200/80">
+            <div className="flex items-center gap-2 pl-2 border-l border-[var(--hair)]">
               {/* User Avatar / Name */}
               <div className="flex items-center gap-2">
                 {user.photoURL ? (
@@ -92,17 +102,17 @@ export const Header: React.FC<HeaderProps> = ({
                     id="user-avatar-img"
                     src={user.photoURL}
                     alt={user.displayName || "User"}
-                    className="w-7 h-7 rounded-full border border-zinc-200 object-cover"
+                    className="w-7 h-7 rounded-full border border-[var(--hair)] object-cover"
                     referrerPolicy="no-referrer"
                   />
                 ) : (
-                  <div className="w-7 h-7 rounded-full bg-zinc-800 text-white font-semibold text-xs flex items-center justify-center">
+                  <div className="w-7 h-7 rounded-full bg-zinc-800 text-white font-semibold text-xs flex items-center justify-center border border-[var(--hair)]">
                     {(user.displayName || user.email || "U")[0].toUpperCase()}
                   </div>
                 )}
                 <span
                   id="user-display-name"
-                  className="text-xs font-medium text-zinc-700 hidden md:inline-block max-w-[120px] truncate"
+                  className="text-xs font-medium text-zinc-300 hidden md:inline-block max-w-[120px] truncate"
                   title={user.displayName || user.email || ""}
                 >
                   {user.displayName || user.email?.split("@")[0]}
@@ -113,21 +123,20 @@ export const Header: React.FC<HeaderProps> = ({
               <button
                 id="btn-sign-out"
                 onClick={onSignOut}
-                className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-medium text-zinc-500 hover:text-red-600 hover:bg-red-50 transition-colors"
+                className="inline-flex items-center gap-1 p-1.5 text-zinc-400 hover:text-rose-400 transition-colors"
                 title="Sign out"
               >
                 <LogOut className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Sign out</span>
+                <span className="sr-only">Sign out</span>
               </button>
             </div>
           ) : (
             <button
               id="btn-google-sign-in"
               onClick={onSignIn}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-zinc-800 bg-white border border-zinc-200 hover:bg-zinc-50 hover:border-zinc-300 transition-all shadow-2xs"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium text-zinc-200 bg-white/5 border border-[var(--hair)] hover:bg-white/10 hover:border-[var(--hair-strong)] transition-all"
             >
-              {/* Google G Logo SVG */}
-              <svg className="w-4 h-4" viewBox="0 0 24 24">
+              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24">
                 <path
                   fill="#4285F4"
                   d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"
@@ -145,7 +154,7 @@ export const Header: React.FC<HeaderProps> = ({
                   d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.36 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"
                 />
               </svg>
-              <span>Sign in with Google</span>
+              <span>Sign in</span>
             </button>
           )}
         </div>
